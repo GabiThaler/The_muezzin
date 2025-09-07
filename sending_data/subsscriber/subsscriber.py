@@ -1,10 +1,12 @@
-from processing_metadata.manager import manager
+from sending_data.manager1 import manager1
 from kafka import KafkaConsumer
 import json
 
 
 #מחלקה שמקשיבה כל הזמן בקפקא לטופיק של המאטא דאטא
 class lesener():
+    def __init__(self):
+        self.manager = manager1.Manager()
     def listen_kafka(self):
         consumer = KafkaConsumer(
             "metadata",  # הטופיק של של המאטאדאטא
@@ -19,7 +21,8 @@ class lesener():
         try:
             for message in consumer:
                 print(f"[{message.topic}] {message.value}")
-                # manager.clean(message.value, message.topic)
+                if message.value:
+                    self.manager.find_uniq_id(message.value)
 
 
         except KeyboardInterrupt:
