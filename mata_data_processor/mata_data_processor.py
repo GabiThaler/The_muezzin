@@ -1,12 +1,13 @@
 from pathlib import Path
 import os
+import json
 
 class Mata_data_processor:
     def __init__(self):
         self.resolt={}
-
-    def Process(self,path):
-        self.resolt["path"]=path
+    #בונה מילון עם השם נתיב ופרטים על הקובץ
+    def Building_dictionary_with_the_metadata(self,path):
+        self.resolt["path"] = path
         self.resolt["name"] = path.name
         self.resolt["info"] ={}
         self.resolt["info"]["size"] = path.stat().st_size
@@ -16,8 +17,7 @@ class Mata_data_processor:
         self.resolt["info"]["Last access time "] = path.stat().st_atime
         self.resolt["info"]["User ID of owner"] = path.stat().st_uid
         self.resolt["info"]["User ID of group"] = path.stat().st_gid
-        stat_info = path.stat()
-        print(stat_info)
-        for k,v in self.resolt.items():
-            print(k,v)
+    #ממיר את המילון לjson
+    def dict_to_json(self,dict):
+        return json.dumps(dict)
 
