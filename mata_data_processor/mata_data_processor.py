@@ -33,6 +33,6 @@ class Mata_data_processor:
 
     #ממיר את המילון לjson
     def dict_to_json(self,dict):
-        a = json.dumps(dict)
-        return a
+        return  json.dumps(dict)
+
 
