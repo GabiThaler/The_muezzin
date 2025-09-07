@@ -1,7 +1,7 @@
-from manager import manager
+from processing_metadata.manager import manager
 from kafka import KafkaConsumer
 import json
-manager=manager.Manager()
+
 
 #מחלקה שמקשיבה כל הזמן בקפקא לטופיק של המאטא דאטא
 class lesener():
@@ -11,7 +11,6 @@ class lesener():
             bootstrap_servers=['localhost:9092'],
             auto_offset_reset='earliest',  # שיקרא מהתחלה אם לא קראנו עדיין
             enable_auto_commit=True,
-            group_id="tweets-consumer-group",
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
         )
 
@@ -26,3 +25,5 @@ class lesener():
         except KeyboardInterrupt:
             print("stopt thre lesenir ")
 
+l=lesener()
+l.listen_kafka()

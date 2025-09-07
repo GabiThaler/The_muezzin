@@ -1,7 +1,7 @@
 from pathlib import Path
-from mata_data_processor import mata_data_processor
-from producer import producer
-import json
+from processing_metadata.mata_data_processor import mata_data_processor
+from processing_metadata.producer import producer
+
 
 class Manager:
     def __init__(self):
