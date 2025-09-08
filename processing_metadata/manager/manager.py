@@ -21,6 +21,7 @@ class Manager:
                 # שולחים את המילון להכנה להמרה לjson
                 dict_data = self.processor._prepare_for_json_serialization(dict_data)
 
+
                 #שולח את המילון שקיבלתי להמרה לjson שאני ישלח לקפקא
                 json_data = self.processor.dict_to_json(dict_data)
                 print(f"{file.name} sent to proses")

@@ -24,9 +24,12 @@ class lesener():
         try:
             for message in consumer:
                 print(f"[{message.topic}] {message.value}")
-                self.manager.insert_to_elasticsearch(message.value)
-                # if message.value:
-                #    print(message.timestamp+message.value["info"]["size"])
+                if(message.value):
+                    self.manager.insert_to_elasticsearch(message.value)
+                    self.manager.insert_file_to_mongo(message.value["path"])
+                else:
+                    print("json is empty")
+
 
         except KeyboardInterrupt:
             print("stopt thre lesenir ")
