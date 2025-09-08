@@ -7,26 +7,28 @@ import json
 class lesener():
     def __init__(self):
         self.manager = manager1.Manager()
-        # pass
+        self.count =0
 
 
     def listen_kafka(self):
+        print("listening")
         consumer = KafkaConsumer(
-            "metadata",  # הטופיק של של המאטאדאטא
+            "Gabis_metadata",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
             auto_offset_reset='earliest',  # שיקרא מהתחלה אם לא קראנו עדיין
             enable_auto_commit=True,
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
         )
 
-        print("listening")
 
         try:
             for message in consumer:
-                print(f"[{message.topic}] {message.value}")
+
                 if(message.value):
-                    self.manager.insert_to_elasticsearch(message.value)
-                    self.manager.insert_file_to_mongo(message.value["path"])
+                    self.manager.maneg_manager(message.value)
+                    print(f"[{message.topic}] {message.value} sent to maneger")
+
+
                 else:
                     print("json is empty")
 
