@@ -33,5 +33,3 @@ class Manager:
 
 
 
-a=Manager()
-a.get_files()

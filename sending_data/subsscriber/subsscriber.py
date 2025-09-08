@@ -24,9 +24,9 @@ class lesener():
         try:
             for message in consumer:
                 print(f"[{message.topic}] {message.value}")
-                if message.value:
-                    # self.manager.find_uniq_id(message.value)
-                    pass
+                self.manager.insert_to_elasticsearch(message.value)
+                # if message.value:
+                #    print(message.timestamp+message.value["info"]["size"])
 
         except KeyboardInterrupt:
             print("stopt thre lesenir ")
