@@ -8,7 +8,6 @@ class Manager:
         self.dir_path=r"C:\data_project_muezzin"
         self.processor = mata_data_processor.Mata_data_processor()
         self.pub = producer.Producer()
-        self.count=0
 
 
     #פןנקציה שעוברת על כל התייקיה ושולחת למעבד כל קובץ
@@ -25,8 +24,6 @@ class Manager:
 
                 #שולח את המילון שקיבלתי להמרה לjson שאני ישלח לקפקא
                 json_data = self.processor.dict_to_json(dict_data)
-                self.count+=1
-                print(self.count)
                 print(f"{file.name} sent to proses")
                 #שולחים את הjson לkafka
                 self.pub.send_to_kafka("Gabis_metadata", dict_data)

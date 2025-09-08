@@ -7,7 +7,7 @@ import json
 class lesener():
     def __init__(self):
         self.manager = manager1.Manager()
-        self.count =0
+
 
 
     def listen_kafka(self):
