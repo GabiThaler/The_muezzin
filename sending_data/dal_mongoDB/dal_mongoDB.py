@@ -1,6 +1,10 @@
 from bson import ObjectId
 from pymongo import MongoClient ,errors
 import os
+import gridfs
+
+
+
 class DAL_MONGO:
 
     def __init__(self):
@@ -9,6 +13,8 @@ class DAL_MONGO:
         self.db_name = os.getenv("DB_NAME", "the_muzzin")
         self.db_coll = os.getenv("DB_COLL", "audio")
         self.db_port = os.getenv("BD_PORT", "27017")
+
+
 
 
     def connect(self):
@@ -33,5 +39,15 @@ class DAL_MONGO:
     def close_conn(self):
         self.client.close()
 
+    def insert_audio(self):
+        try:
+            fs = gridfs.GridFS(self.client, self.db_coll)
+            with open(r"'C:\\data_project_muezzin\\download (5).wav'", 'rb') as f:
+                file_id = fs.put(f, filename='my_file.txt')
+        except Exception as err:
+            print(f"Unexpected error: {err}")
+
+
 d=DAL_MONGO()
 d.connect()
+d.insert_audio()
