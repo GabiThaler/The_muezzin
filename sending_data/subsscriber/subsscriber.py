@@ -7,6 +7,9 @@ import json
 class lesener():
     def __init__(self):
         self.manager = manager1.Manager()
+        # pass
+
+
     def listen_kafka(self):
         consumer = KafkaConsumer(
             "metadata",  # הטופיק של של המאטאדאטא
@@ -22,11 +25,9 @@ class lesener():
             for message in consumer:
                 print(f"[{message.topic}] {message.value}")
                 if message.value:
-                    self.manager.find_uniq_id(message.value)
-
+                    # self.manager.find_uniq_id(message.value)
+                    pass
 
         except KeyboardInterrupt:
             print("stopt thre lesenir ")
 
-l=lesener()
-l.listen_kafka()
