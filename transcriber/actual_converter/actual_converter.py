@@ -1,7 +1,12 @@
 from faster_whisper import WhisperModel
-class Transcriber:
-    def Transcriber_activator(self,path):
+import pkg_resources
 
+
+class Transcriber:
+    def __init__(self):
+        pass
+    def Transcriber_activator(self,path):
+        result = ""
         #בחירת גודל הקובץ
         model_size = "small"
 
@@ -16,7 +21,7 @@ class Transcriber:
 
         #עוברים בלולאה על התמלול ומדפיסים לפי חלקים וכותבים ממתי עד מתי בשניות ואת המלל
         for segment in segments:
+            print(type(segment.text))
+            result += segment.text
             print(f"[{segment.start:.2f}s -> {segment.end:.2f}s] {segment.text}")
-
-s=Transcriber()
-s.Transcriber_activator("C:\data_project_muezzin\download (1).wav")
+        return result

@@ -1,4 +1,4 @@
-from sending_data.manager1 import manager1
+from transcriber.manager import manager_transcriber
 from kafka import KafkaConsumer
 import json
 from logger.loger_manager import Logger
@@ -8,34 +8,33 @@ from logger.loger_manager import Logger
 class lesener():
     def __init__(self):
         self.logger = Logger.get_logger()
-        self.manager = manager1.Manager()
+        self.manager = manager_transcriber.Manager_transcriber()
 
 
 
     def listen_kafka(self):
-        self.logger.info('Listening Kafka in topic "Gabis_metadata"')
+
         consumer = KafkaConsumer(
-            "gabis_metadata",  # הטופיק של של המאטאדאטא
+            "Transcription_station",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
             auto_offset_reset='latest',
             enable_auto_commit=True,#שיקרא מהתחלה אם לא קראנו עדיין
-            # group_id='gabis_metadata_good',
+            group_id='muezzin_metadata',
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
 
         )
-
+        self.logger.info('Listening Kafka in topic "Transcription station"')
         try:
-            print("gabi 1")
             for message in consumer:
-                print("gabi 2")
-                if(message.value):
-                    print("Received message:")
-                    self.manager.maneg_manager(message.value)
-                    self.logger.debug(f"[{message.topic}] {message.value} sent to maneger")
+
+                if (message.value):
+                    self.logger.debug(f"{message.value} is sent to trenscrib")
+                    self.manager.send_to_add_transcriber(message.value)
+                    print(message.value)
 
 
                 else:
-                    self.logger.info(f"[{message.topic}] {message.value} dict is empty")
+                    self.logger.error(f"[{message.topic}] {message.value} dict is empty")
 
 
         except KeyboardInterrupt:
