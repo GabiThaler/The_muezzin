@@ -4,9 +4,11 @@ from sending_data.dal_mongoDB import dal_mongoDB
 #הספריות שמקודדת את המזהה יחודי
 import uuid
 import hashlib
+from loger_manager import Logger
 
 class Manager:
     def __init__(self):
+        self.logger = Logger.get_logger()
         self.dal_elastic = dal_elasticsearch.DAL_Elasticsearch()
         self.dal_mongo = dal_mongoDB.DAL_MONGO()
 
@@ -21,7 +23,7 @@ class Manager:
     def find_uniq_id(self,my_string):
         # Generate a UUID based on the MD5 hash of the string
         unique_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, my_string)
-        print(f"The UUID generated from '{my_string}' is: {unique_uuid}")
+        self.logger.debug(f"The UUID generated from '{my_string}' is: {unique_uuid}")
 
     #מכניסים את המאטא דאטא לelasticsearch עH הDAL הרלוונטי
     def insert_to_elasticsearch(self,data):

@@ -1,9 +1,11 @@
 from kafka import KafkaProducer
 import json
+from loger_manager import Logger
 
 
 class Producer:
     def __init__(self):
+        self.logger = Logger.get_logger()
         # מגדירים producer פעם אחת
         self.producer = KafkaProducer(
             bootstrap_servers=['localhost:9092'],
@@ -13,6 +15,5 @@ class Producer:
         try:
             self.producer.send(topic,message)
             self.producer.flush()
-            print(f"sent to {topic}: {message}")
         except Exception as e:
-            print(f"the kafka was not send {e}")
+            self.logger.error(f"the kafka was not send {e}")

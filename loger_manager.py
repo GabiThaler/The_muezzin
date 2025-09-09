@@ -4,8 +4,8 @@ from datetime import datetime
 class Logger:
     _logger = None
     @classmethod
-    def get_logger(cls, name="logger_muezzin", es_host="metadata_test",
-index="your_index_logs_name", level=logging.DEBUG):
+    def get_logger(cls, name="logger_muezzin", es_host="http://localhost:9200",
+index="your_index_logs_name", level=logging.INFO):
         if cls._logger:
             return cls._logger
         logger = logging.getLogger(name)
@@ -27,3 +27,5 @@ index="your_index_logs_name", level=logging.DEBUG):
                         print(f"ES log failed: {e}")
             logger.addHandler(ESHandler())
             logger.addHandler(logging.StreamHandler())
+            cls._logger = logger
+            return logger

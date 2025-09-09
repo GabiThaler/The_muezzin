@@ -1,17 +1,19 @@
 from sending_data.manager1 import manager1
 from kafka import KafkaConsumer
 import json
+from loger_manager import Logger
 
 
 #מחלקה שמקשיבה כל הזמן בקפקא לטופיק של המאטא דאטא
 class lesener():
     def __init__(self):
+        self.logger = Logger.get_logger()
         self.manager = manager1.Manager()
 
 
 
     def listen_kafka(self):
-        print("listening")
+        self.logger.info('Listening Kafka in topic "Gabis_metadata"')
         consumer = KafkaConsumer(
             "Gabis_metadata",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
@@ -26,13 +28,13 @@ class lesener():
 
                 if(message.value):
                     self.manager.maneg_manager(message.value)
-                    print(f"[{message.topic}] {message.value} sent to maneger")
+                    self.logger.debug(f"[{message.topic}] {message.value} sent to maneger")
 
 
                 else:
-                    print("json is empty")
+                    self.logger.info(f"[{message.topic}] {message.value} dict is empty")
 
 
         except KeyboardInterrupt:
-            print("stopt thre lesenir ")
+            self.logger.info('Stopping Kafka')
 
