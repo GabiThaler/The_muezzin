@@ -29,9 +29,9 @@ class Manager:
 
                 #שולח את המילון שקיבלתי להמרה לjson שאני ישלח לקפקא
                 json_data = self.processor.dict_to_json(dict_data)
-                # self.logger.info(f"{file.name} sent to proses")
+                self.logger.debug(f"{file.name} sent to proses")
                 #שולחים את הjson לkafka
-                self.pub.send_to_kafka("Gabis_metadata", json_data)
+                self.pub.send_to_kafka("Gabis_metadata", dict_data)
         self.logger.info("completed prossing and sending metadata to topic")
 
 

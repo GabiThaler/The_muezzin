@@ -17,9 +17,11 @@ class lesener():
         consumer = KafkaConsumer(
             "Gabis_metadata",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
-            auto_offset_reset='earliest',  # שיקרא מהתחלה אם לא קראנו עדיין
+            auto_offset_reset='latest',  # שיקרא מהתחלה אם לא קראנו עדיין
+            # group_id='gabis_metadata',
             enable_auto_commit=True,
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
+
         )
 
 

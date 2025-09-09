@@ -21,3 +21,8 @@ docker run -p 127.0.0.1:9200:9200 -d --name elasticsearch -e "discovery.type=sin
 #פקודות להאריץ את הדוקרים של המונגו דיבי
 docker pull mongodb/mongodb-community-server:latest
 docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest
+
+
+#פקודה להרצהת הספרייה של התמלול אודיו
+
+pip install faster_whisper
