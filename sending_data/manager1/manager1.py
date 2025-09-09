@@ -3,8 +3,7 @@ from sending_data.subsscriber import subsscriber
 from sending_data.dal_mongoDB import dal_mongoDB
 #הספריות שמקודדת את המזהה יחודי
 import uuid
-import hashlib
-from loger_manager import Logger
+from logger.loger_manager import Logger
 
 class Manager:
     def __init__(self):

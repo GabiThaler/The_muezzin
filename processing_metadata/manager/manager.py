@@ -1,7 +1,7 @@
 from pathlib import Path
 from processing_metadata.mata_data_processor import mata_data_processor
 from processing_metadata.producer import producer
-from loger_manager import Logger
+from logger.loger_manager import Logger
 
 
 class Manager:

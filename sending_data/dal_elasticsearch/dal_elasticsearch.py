@@ -1,5 +1,5 @@
 from elasticsearch import Elasticsearch
-from loger_manager import Logger
+from logger.loger_manager import Logger
 
 class DAL_Elasticsearch:
     def __init__(self):

@@ -1,6 +1,6 @@
 from kafka import KafkaProducer
 import json
-from loger_manager import Logger
+from logger.loger_manager import Logger
 
 
 class Producer:
@@ -15,5 +15,6 @@ class Producer:
         try:
             self.producer.send(topic,message)
             self.producer.flush()
+            self.logger.debug(f"Sent {message} to topic {topic}")
         except Exception as e:
             self.logger.error(f"the kafka was not send {e}")

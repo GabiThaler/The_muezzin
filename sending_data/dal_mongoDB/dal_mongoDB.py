@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from gridfs import GridFS
-from loger_manager import Logger
+from logger.loger_manager import Logger
 class DAL_MONGO:
     def __init__(self):
         self.logger = Logger.get_logger()

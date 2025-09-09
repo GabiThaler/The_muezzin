@@ -1,7 +1,7 @@
 from sending_data.manager1 import manager1
 from kafka import KafkaConsumer
 import json
-from loger_manager import Logger
+from logger.loger_manager import Logger
 
 
 #מחלקה שמקשיבה כל הזמן בקפקא לטופיק של המאטא דאטא
