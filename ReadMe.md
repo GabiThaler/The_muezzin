@@ -53,3 +53,7 @@ On the other hand, each step would not depend on the second step if we did it in
 
 
 
+##Start the program
+pip install commands.bat
+pip install requirements.txt
+And in each folder there is a main file that needs to be run

@@ -26,3 +26,7 @@ docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:lat
 #פקודה להרצהת הספרייה של התמלול אודיו
 
 pip install faster_whisper
+
+#התקנה של כל הסיפריות שצריך בתוכנית
+
+pip install -r requirements.txt
