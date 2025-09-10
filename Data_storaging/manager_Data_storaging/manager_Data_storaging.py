@@ -30,6 +30,7 @@ class Manager:
         # Generate a UUID based on the MD5 hash of the string
         unique_uuid = uuid.uuid5(uuid.NAMESPACE_DNS, my_string)
         self.logger.debug(f"The UUID generated from '{my_string}' is: {unique_uuid}")
+        return unique_uuid
 
     #מכניסים את המאטא דאטא לelasticsearch עH הDAL הרלוונטי
     def insert_to_elasticsearch(self,data):
@@ -41,7 +42,7 @@ class Manager:
     #פונקציה שמנהלת את כל התהליך
     def maneg_manager(self,messege):
         #יוצרים id יחודי
-        id=self.find_uniq_id(messege["path"]+messege["name"])
+        id = self.find_uniq_id(messege["path"]+messege["name"])
         #מכניסים את הid לתוך המילון
         messege["unique_id"]=id
         #מכניסים את המילון לתוך האלסטיק
