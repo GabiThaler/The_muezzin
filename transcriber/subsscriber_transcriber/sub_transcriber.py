@@ -14,6 +14,7 @@ class lesener():
 
     def listen_kafka(self):
         #הגדרת הקונסומר
+        self.logger.info('Listening Kafka in topic "Transcription station"')
         consumer = KafkaConsumer(
             "Transcription_station",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
@@ -23,10 +24,9 @@ class lesener():
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
 
         )
-        self.logger.info('Listening Kafka in topic "Transcription station"')
+
         try:
             for message in consumer:
-
                 if (message.value):
                     self.logger.debug(f"{message.value} is sent to trenscrib")
                     self.manager.handler(message.value)

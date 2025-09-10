@@ -41,14 +41,16 @@ class Manager:
         self.dal_mongo.store_audio_gridfs(path)
     #פונקציה שמנהלת את כל התהליך
     def maneg_manager(self,messege):
-        #יוצרים id יחודי
-        id = self.find_uniq_id(messege["path"]+messege["name"])
+        path_name = messege["path"]
+        # יוצרים id יחודי
+        a_id = self.find_uniq_id(path_name)
         #מכניסים את הid לתוך המילון
-        messege["unique_id"]=id
-        #מכניסים את המילון לתוך האלסטיק
+        messege['unique_id']=a_id
+        # מכניסים את המילון לתוך האלסטיק
         self.insert_to_elasticsearch(messege)
         #מכניסים את הקובץ עצמו לתוך המונגו
-        self.insert_file_to_mongo(messege["path"])
-
+        self.insert_file_to_mongo(messege['path'])
+        # print(messege)
+        # print(type(messege))
 
 

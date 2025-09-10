@@ -21,6 +21,8 @@ class Manager_BDS_calculator:
         self.very_hostile_list= self.text_clener.Converting_text_to_lowercase(self.very_hostile_list)
         self.Hostile_list = self.calculater.string_to_list(self.Hostile_list)
         self.very_hostile_list = self.calculater.string_to_list(self.very_hostile_list)
+
+
     #הפונקציה שמהלת את כל הבדיקה
     def managemer(self, text:str)-> dict:
         result = {}
@@ -43,7 +45,3 @@ class Manager_BDS_calculator:
 
 
 
-c=Manager_BDS_calculator()
-c.clean_text()
-a = c.managemer("Welcome back. Today, I can't stop thinking about Gaza. The blockade has turned daily life into a humanitarian crisis. Families can't even get clean water. And the reports of war crimes? It's overwhelming. Some call it genocide. And honestly, it feels that way when you see the destruction. That's why groups like BDS keep pushing. Boycotts, divestments, protests, they're nonviolent ways to demand accountability. Exactly. And the ICC investigations, they give hope. But people on the ground need relief now. Food, medicine, safety. Liberation isn't just a slogan. It's about dignity, ending apartheid, and giving refugees a chance to live freely. And we'll keep amplifying their voices here. Free Palestine.")
-print(a)

@@ -30,6 +30,6 @@ class Manager_transcriber:
 
 
     def send_to_kafka(self,messege):
-        self.pub.send_to_kafka("Storaging_station",messege)
+        self.pub.send_to_kafka("BDS_calculator",messege)
 
 

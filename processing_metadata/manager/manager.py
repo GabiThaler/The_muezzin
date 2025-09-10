@@ -28,7 +28,7 @@ class Manager:
                 json_data = self.processor.dict_to_json(dict_data)
                 self.logger.debug(f"{file.name} sent to proses")
                 #שולחים את הjson לkafka
-                self.pub.send_to_kafka("Transcription_station", json_data)
+                self.pub.send_to_kafka("Transcription_station", dict_data)
         self.logger.info("completed prossing and sending metadata to topic")
 
 
