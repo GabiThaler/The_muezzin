@@ -1,4 +1,4 @@
-from sending_data.manager1 import manager1
+from Data_storaging.manager_Data_storaging import manager_Data_storaging
 from kafka import KafkaConsumer
 import json
 from logger.loger_manager import Logger
@@ -8,14 +8,15 @@ from logger.loger_manager import Logger
 class lesener():
     def __init__(self):
         self.logger = Logger.get_logger()
-        self.manager = manager1.Manager()
+        self.manager = manager_Data_storaging.Manager()
+        self.manager.connect_to_elastic()
 
 
 
     def listen_kafka(self):
-        self.logger.info('Listening Kafka in topic "Gabis_metadata"')
+        self.logger.info('Listening Kafka in topic "Storaging_station"')
         consumer = KafkaConsumer(
-            "gabis_metadata",  # הטופיק של של המאטאדאטא
+            "Storaging_station",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
             auto_offset_reset='latest',
             enable_auto_commit=True,#שיקרא מהתחלה אם לא קראנו עדיין
@@ -25,19 +26,16 @@ class lesener():
         )
 
         try:
-            print("gabi 1")
             for message in consumer:
-                print("gabi 2")
                 if(message.value):
-                    print("Received message:")
                     self.manager.maneg_manager(message.value)
                     self.logger.debug(f"[{message.topic}] {message.value} sent to maneger")
 
 
                 else:
-                    self.logger.info(f"[{message.topic}] {message.value} dict is empty")
+                    self.logger.error(f"[{message.topic}] {message.value} dict is empty")
 
 
         except KeyboardInterrupt:
-            self.logger.info('Stopping Kafka')
+            self.logger.error('Stopping Kafka')
 

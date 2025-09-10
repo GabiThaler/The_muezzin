@@ -8,7 +8,6 @@ class Manager:
     def __init__(self):
         self.logger = Logger.get_logger()
         self.logger.info("The muazin started")
-
         self.dir_path=r"C:\data_project_muezzin"
         self.processor = mata_data_processor.Mata_data_processor()
         self.pub = producer.Producer()
@@ -25,8 +24,6 @@ class Manager:
                 dict_data = self.processor.Building_dictionary_with_the_metadata(file)
                 # שולחים את המילון להכנה להמרה לjson
                 dict_data = self.processor._prepare_for_json_serialization(dict_data)
-
-
                 #שולח את המילון שקיבלתי להמרה לjson שאני ישלח לקפקא
                 json_data = self.processor.dict_to_json(dict_data)
                 self.logger.debug(f"{file.name} sent to proses")

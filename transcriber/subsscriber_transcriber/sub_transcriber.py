@@ -1,4 +1,4 @@
-from transcriber.manager import manager_transcriber
+from transcriber.manager_transcriber import manager_transcriber
 from kafka import KafkaConsumer
 import json
 from logger.loger_manager import Logger
@@ -13,7 +13,7 @@ class lesener():
 
 
     def listen_kafka(self):
-
+        #הגדרת הקונסומר
         consumer = KafkaConsumer(
             "Transcription_station",  # הטופיק של של המאטאדאטא
             bootstrap_servers=['localhost:9092'],
@@ -29,8 +29,8 @@ class lesener():
 
                 if (message.value):
                     self.logger.debug(f"{message.value} is sent to trenscrib")
-                    self.manager.send_to_add_transcriber(message.value)
-                    print(message.value)
+                    self.manager.handler(message.value)
+
 
 
                 else:

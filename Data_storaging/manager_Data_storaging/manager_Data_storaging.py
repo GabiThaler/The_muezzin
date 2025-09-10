@@ -1,6 +1,6 @@
-from sending_data.dal_elasticsearch import dal_elasticsearch
-from sending_data.subsscriber import subsscriber
-from sending_data.dal_mongoDB import dal_mongoDB
+from Data_storaging.dal_elasticsearch import dal_elasticsearch
+from Data_storaging.subsscriber import subsscriber
+from Data_storaging.dal_mongoDB import dal_mongoDB
 #הספריות שמקודדת את המזהה יחודי
 import uuid
 from logger.loger_manager import Logger
@@ -8,13 +8,20 @@ from logger.loger_manager import Logger
 class Manager:
     def __init__(self):
         self.logger = Logger.get_logger()
-        self.dal_elastic = dal_elasticsearch.DAL_Elasticsearch()
         self.dal_mongo = dal_mongoDB.DAL_MONGO()
+        self.dal_elastic = None
+
+
+    def connect_to_elastic(self):
+        #מפעילים את האלסטיק והסיבה שהתחלתי אותה פה ולא בקונטרקטור כי לא רציתי שהיא תתחבר פעמיים
+        self.dal_elastic = dal_elasticsearch.DAL_Elasticsearch()
+
 
     #פה אנחנו מדליקים את האזנה של הקפקה
     def get_sub(self):
         self.sub = subsscriber.lesener()
         self.sub.listen_kafka()
+
 
 
 
